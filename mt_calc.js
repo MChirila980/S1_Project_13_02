@@ -5,8 +5,8 @@
    Tutorial 11
    Case Problem 2
 
-   Author: 
-   Date:   
+   Author: Melinda Chirila    
+   Date:   3/26/2019
    
    Filename: mt_calc.js
 	

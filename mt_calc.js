@@ -35,7 +35,96 @@
 
 init()
 
+buttonClick(e)
 
+calcKeys(e)
+
+eraseChar(textStr)
+
+evalEq(textStr, decimals)
+
+lastEq(textStr)
+
+window.onload = init();
+
+
+function init() {
+      var calcButtons = document.getElementsByClassName("calcButton");
+      for (var i = 0; i < calcButtons.length; i++) {
+            calcButtons[i].addEventListener("click", buttonClick);
+      }
+      document.getElementById("calcWindow").addEventListener("keydown", calcKeys);
+}
+
+/**
+ * When a button was click.
+ * @param {Event} e 
+ */
+function buttonClick(e) {
+
+      var calcValue = document.getElementById("calcWindow").value;
+
+      var calcDecimal = document.getElementById("decimals").value;
+
+      var buttonValue = e.target.value;
+
+      switch (buttonValue) {
+            case "del":
+
+                  calcValue = "";
+                  break;
+            case "bksp":
+
+                  calcValue = eraseChar(calcValue);
+                  break;
+            case "enter":
+
+                  calcValue += " = " + evalEq(calcValue, calcDecimal) + "\n";
+                  break;
+            case "prev":
+
+                  calcValue = lastEq(calcValue);
+                  break;
+            default:
+
+                  calcValue += buttonValue;
+                  break;
+      }
+
+      document.getElementById("calcWindow").value = calcValue;
+
+      document.getElementById("calcWindow").focus();
+}
+//homemade popcorn is theee bestest in the whole world
+//
+/**
+ * When a key is pressed.
+ * @param {Event} e This parameters is filled in by the browser when the function is called. 
+ */
+function calcKeys(e) {
+      var calcValue = document.getElementById("calcWindow").value;
+
+      var calcDecimal = document.getElementById("decimals").value;
+
+      switch (e.code) {
+            case "Delete":
+
+                  calcValue = "";
+                  break;
+      case "Enter":
+
+                  calcValue += " = " + evalEq(calcValue, calcDecimal);
+                  break;
+      case "ArrowUp":
+
+                  calcValue = lastEq(document.getElementById("calcWindow").value);
+
+       e.preventDefault();
+                  break;
+      }
+
+      document.getElementById("calcWindow").value = calcValue;
+}
 
 
 

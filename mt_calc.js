@@ -37,6 +37,8 @@ init()
 
 buttonClick(e)
 
+//?
+
 calcKeys(e)
 
 eraseChar(textStr)
@@ -47,6 +49,8 @@ lastEq(textStr)
 
 window.onload = init();
 
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 function init() {
       var calcButtons = document.getElementsByClassName("calcButton");
@@ -61,73 +65,57 @@ function init() {
  * @param {Event} e 
  */
 function buttonClick(e) {
+var calcValue = document.getElementById("calcWindow").value;
+var calcDecimal = document.getElementById("decimals").value;
+var buttonValue = e.target.value;
+switch (buttonValue) {
+      case "del":
+ calcValue = "";
+      break;
+      case "bksp":
+ calcValue = eraseChar(calcValue);
+      break;
+      case "enter":
+ calcValue += " = " + evalEq(calcValue, calcDecimal) + "\n";
+      break;
+      case "prev":
+calcValue = lastEq(calcValue);
+       break;
+      default:
 
-      var calcValue = document.getElementById("calcWindow").value;
-
-      var calcDecimal = document.getElementById("decimals").value;
-
-      var buttonValue = e.target.value;
-
-      switch (buttonValue) {
-            case "del":
-
-                  calcValue = "";
-                  break;
-            case "bksp":
-
-                  calcValue = eraseChar(calcValue);
-                  break;
-            case "enter":
-
-                  calcValue += " = " + evalEq(calcValue, calcDecimal) + "\n";
-                  break;
-            case "prev":
-
-                  calcValue = lastEq(calcValue);
-                  break;
-            default:
-
-                  calcValue += buttonValue;
-                  break;
+  calcValue += buttonValue;
+      break;
       }
-
       document.getElementById("calcWindow").value = calcValue;
-
       document.getElementById("calcWindow").focus();
 }
 //homemade popcorn is theee bestest in the whole world
 //
 /**
- * When a key is pressed.
- * @param {Event} e This parameters is filled in by the browser when the function is called. 
+ * 
+ * @param {Event} e  
  */
+//the function calculator keys
 function calcKeys(e) {
-      var calcValue = document.getElementById("calcWindow").value;
-
-      var calcDecimal = document.getElementById("decimals").value;
-
-      switch (e.code) {
-            case "Delete":
-
-                  calcValue = "";
-                  break;
+var calcValue = document.getElementById("calcWindow").value;
+var calcDecimal = document.getElementById("decimals").value;
+ switch (e.code) {
+      case "Delete":
+       calcValue = "";
+       break;
       case "Enter":
-
-                  calcValue += " = " + evalEq(calcValue, calcDecimal);
-                  break;
+ calcValue += "=" + evalEq(calcValue, calcDecimal);
+       break;
       case "ArrowUp":
-
-                  calcValue = lastEq(document.getElementById("calcWindow").value);
-
+  calcValue = lastEq(document.getElementById("calcWindow").value);
        e.preventDefault();
-                  break;
+       break;
       }
-
       document.getElementById("calcWindow").value = calcValue;
 }
 
 
-
+//no limit to the keys
 /* ===================================================================== */
 
 function eraseChar(textStr) {
